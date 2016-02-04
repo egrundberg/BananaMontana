@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>A.C.M.E.</title>
+        <link rel="stylesheet" type="text/css" href="style.css"/>
+    </h:head>
+    <h:body>
+        <div class="wrapper">
+            <div class="major">
+                <h:form>
+                    <p>
+                        <h:outputLabel for="username" value="Username : "/> 
+                        <h:inputText class="inputtext" id="username" value="#{webShopManager.currentUsername}" />
+                    </p>
+                    <p>
+                        <h:outputLabel for="password" value="Password : "/> 
+                        <h:inputSecret class="inputtext" id="password" value="#{webShopManager.currentPassword}" />
+                    </p>
+                    <p>
+                        <h:commandButton class="button" value="Login" action="#{webShopManager.loginCustomer}"/>
+                        <h:commandButton class="button" value="Register" action="#{webShopManager.createNewCustomer}"/>
+                        <h:commandButton class="button" value="Administrator" action="#{webShopManager.loginAdmin}"/>
+                    </p>
+                    <p rendered="#{webShopManager.error != null}">
+                        <h:outputText value="#{webShopManager.error}" style="color:red"/>
+                    </p>
+                </h:form>
+            </div>
+        </div>
+    </h:body>
+</html>
+

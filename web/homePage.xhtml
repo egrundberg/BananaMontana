@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>A.C.M.E.</title>
+        <link rel="stylesheet" type="text/css" href="style.css"/>
+    </h:head>
+    <h:body>
+
+        <!-- LOGGED IN AS CUSTOMER -->
+        <div class="wrapper">
+            <h:form>
+                <div class="userinfo"> 
+                    <p>Logged in as: <h:outputText class="bold" value="#{webShopManager.customer.username}"/></p>
+                    <p>Current balance: <h:outputText class="bold" value="#{webShopManager.customer.balance}"/></p>
+                <p><h:commandButton class="button" value="Log out" action="#{webShopManager.logOut}"/></p>
+                <p><h:commandButton class="button" value="Deposit 1000" action="#{webShopManager.deposit}"/></p>
+                </div>
+                <div class="major">
+                <h3>Store</h3>
+                <table>
+                    <th>Color</th>
+                    <th>Price</th>
+                    <th>Availability</th>
+                    <c:forEach var="gnome" items="#{webShopManager.gnomes}">
+                        <tr>
+                            <td>
+                                <h:outputText value="#{gnome.color}"/>
+                            </td>
+                            <td>
+                                <h:outputText value="#{gnome.price}"/>
+                            </td>
+                            <td>
+                                <h:outputText value="#{gnome.amount}"/>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </table>
+
+                <p>
+                    <h:outputLabel for="color" value="Color: "/>
+                    <h:inputText class="inputtext" id="color" value="#{webShopManager.currentColor}"/>
+                </p>
+                <p>
+                    <h:outputLabel for="amount" value="Amount: "/>
+                    <h:inputText class="inputtext" id="amount" value="#{webShopManager.currentAmount}"/>
+                </p>
+                <p>
+                    <h:commandButton class="button" value="Add to basket" action="#{webShopManager.addToBasket()}"/>
+                </p>
+                </div>
+                <div class="major">
+                <h3>Basket</h3>
+                <table>
+                    <th>Color</th>
+                    <th>Amount</th>
+                    <th>Total price</th>
+                    <c:forEach var="item" items="#{webShopManager.basket}">
+                        <tr>
+                            <td>
+                                <h:outputText value="#{item.color}"/>
+                            </td>
+                            <td>
+                                <h:outputText value="#{item.amount}"/>
+                            </td>
+                            <td>
+                                <h:outputText value="#{item.totalPrice}"/>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                    <tr>
+                        <td></td>
+                        <td>Total:</td>
+                        <td><h:outputText value="#{webShopManager.total}"/></td>
+                    </tr>
+                </table>
+                <p rendered="#{webShopManager.error != null}">
+                    <h:outputText value="#{webShopManager.error}" style="color: red"/>
+                </p>
+                <p rendered="#{webShopManager.basket != null}">
+                    <h:commandButton class="button" value="Purchase" action="#{webShopManager.buy}"/>
+                    <h:commandButton class="button" value="Empty Basket" action="#{webShopManager.emptyBasket}"/>
+                </p>
+                </div>
+            </h:form>
+        </div>
+    </h:body>
+</html>
+

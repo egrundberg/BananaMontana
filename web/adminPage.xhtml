@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>A.C.M.E.</title>
+        <link rel="stylesheet" type="text/css" href="style.css"/>
+    </h:head>
+    <h:body>
+        <div class="wrapper">
+            <!-- LOGGED IN AS CUSTOMER -->
+            <h:form>
+                <div class="userinfo">
+                    <p>Logged in as: <h:outputText class="bold" value="Admin"/></p>
+                    <p><h:commandButton class="button" value="Log out" action="#{webShopManager.logOut}"/></p>
+                </div>
+                <div class="main">
+                    <h3>Store</h3>
+                    <table>
+                        <th>Color</th>
+                        <th>Price</th>
+                        <th>Availability</th>
+                        <c:forEach var="gnome" items="#{webShopManager.gnomes}">
+                            <tr>
+                                <td>
+                                    <h:outputText value="#{gnome.color}"/>
+                                </td>
+                                <td>
+                                    <h:outputText value="#{gnome.price}"/>
+                                </td>
+                                <td>
+                                    <h:outputText value="#{gnome.amount}"/>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                    <p>
+                        <h:outputLabel for="color" value="Color: "/>
+                        <h:inputText class="inputtext" id="color" value="#{webShopManager.currentColor}"/>
+                    </p>
+                    <p>
+                        <h:outputLabel for="amount" value="Amount: "/>
+                        <h:inputText class="inputtext" id="amount" value="#{webShopManager.currentAmount}"/>
+                    </p>
+
+                    <p>
+                        <h:outputLabel for="price" value="Price (Leave blank to keep price): "/>
+                        <h:inputText class="inputtext" id="price" value="#{webShopManager.currentPrice}"/>
+                    </p>
+                    <p>
+                        <h:commandButton class="button" value="Add to inventory" action="#{webShopManager.addGnome()}"/>
+                        <h:commandButton class="button" value="Remove gnome type" action="#{webShopManager.removeGnome()}"/>
+                    </p>
+                    <h3>User management</h3>
+                    <p>
+                        <h:outputLabel for="user" value="User: "/>
+                        <h:inputText class="inputtext" id="user" value="#{webShopManager.currentUsername}"/>
+                    </p>
+                    <p>
+                        <h:commandButton class="button" value="Ban user" action="#{webShopManager.banUser()}"/>
+                        <h:commandButton class="button" value="Unban user" action="#{webShopManager.unbanUser()}"/>
+                    </p>
+                </div>
+            </h:form>
+        </div>
+    </h:body>
+</html>
+
